@@ -40,6 +40,7 @@
                         <x-lucide-external-link class="w-3 h-3"/>
                     </a>
                 </li>
+                <x-nav-dropdown-link route="map-layers.index">Map Layers</x-nav-dropdown-link>
                 <x-nav-dropdown-link route="contribute">Contribute</x-nav-dropdown-link>
                 <x-nav-dropdown-link route="contact">Contact</x-nav-dropdown-link>
             </x-nav-dropdown>
@@ -52,6 +53,7 @@
                     <x-lucide-external-link class="w-3 h-3"/>
                 </a>
             </li>
+            <x-nav-link route="map-layers.index" class="nav-break:hidden">Map Layers</x-nav-link>
             <x-nav-link route="contribute" class="nav-break:hidden">Contribute</x-nav-link>
             <x-nav-link route="contact" class="nav-break:hidden">Contact</x-nav-link>
         </ul>
