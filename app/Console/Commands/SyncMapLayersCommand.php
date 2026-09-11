@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 
 class SyncMapLayersCommand extends Command
 {
-    protected $signature = 'map:sync {--slug= : Sync a specific map layer by slug}';
+    protected $signature = 'map:sync {--slug= : Sync a specific map layer by slug} {--delay=0 : Seconds to wait between layers when syncing all}';
 
     protected $description = 'Sync map layer GeoJSON files from their remote data sources';
 
@@ -47,7 +47,8 @@ class SyncMapLayersCommand extends Command
 
     private function syncAll(MapLayerSyncService $service): int
     {
-        $results = $service->syncAll();
+        $delay = max(0, (int) $this->option('delay'));
+        $results = $service->syncAll($delay);
         $failed = 0;
 
         foreach ($results as $slug => $result) {

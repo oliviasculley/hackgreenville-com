@@ -24,7 +24,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'breweries',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -55,7 +55,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'test-layer',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -72,11 +72,11 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
         $this->assertStringContainsString('2 features', $result['message']);
     }
 
-    public function test_sync_from_geojson_link(): void
+    public function test_sync_from_geojson_remote_link(): void
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'coworking',
-            'geojson_link' => 'https://example.com/points.geojson',
+            'geojson_remote_link' => 'https://example.com/points.geojson',
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -104,11 +104,11 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
         $this->assertEquals('Test Space', $stored['features'][0]['properties']['title']);
     }
 
-    public function test_sync_prefers_geojson_link_over_raw_data_link(): void
+    public function test_sync_prefers_geojson_remote_link_over_raw_data_link(): void
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'test',
-            'geojson_link' => 'https://example.com/points.geojson',
+            'geojson_remote_link' => 'https://example.com/points.geojson',
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -130,7 +130,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'empty',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => null,
         ]);
 
@@ -144,7 +144,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'broken',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/missing.csv',
         ]);
 
@@ -162,7 +162,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'bad-geojson',
-            'geojson_link' => 'https://example.com/bad.geojson',
+            'geojson_remote_link' => 'https://example.com/bad.geojson',
         ]);
 
         Http::fake([
@@ -179,7 +179,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'out-of-range',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -204,7 +204,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'no-features',
-            'geojson_link' => 'https://example.com/points.geojson',
+            'geojson_remote_link' => 'https://example.com/points.geojson',
         ]);
 
         Http::fake([
@@ -222,7 +222,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'bad-geometry',
-            'geojson_link' => 'https://example.com/points.geojson',
+            'geojson_remote_link' => 'https://example.com/points.geojson',
         ]);
 
         // A Point whose coordinates are non-numeric is structurally invalid
@@ -251,7 +251,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'empty-props',
-            'geojson_link' => 'https://example.com/points.geojson',
+            'geojson_remote_link' => 'https://example.com/points.geojson',
         ]);
 
         Http::fake([
@@ -276,13 +276,13 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         MapLayer::factory()->create([
             'slug' => 'layer-a',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/a.csv',
         ]);
 
         MapLayer::factory()->create([
             'slug' => 'layer-b',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/b.csv',
         ]);
 
@@ -302,7 +302,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'slash-test',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -325,7 +325,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'overwrite-test',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -355,7 +355,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'empty-csv',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -380,7 +380,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'dead-sheet',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -403,7 +403,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'dead-geojson',
-            'geojson_link' => 'https://example.com/points.geojson',
+            'geojson_remote_link' => 'https://example.com/points.geojson',
         ]);
 
         Http::fake([
@@ -425,7 +425,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'sneaky-html',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -446,7 +446,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'pretty-test',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -467,7 +467,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'my-custom-layer',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -484,7 +484,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'props-test',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 
@@ -507,7 +507,7 @@ class MapLayerSyncServiceTest extends DatabaseTestCase
     {
         $layer = MapLayer::factory()->create([
             'slug' => 'test-normalize',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/data.csv',
         ]);
 

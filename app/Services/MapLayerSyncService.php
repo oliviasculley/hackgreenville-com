@@ -50,11 +50,18 @@ class MapLayerSyncService
      *
      * @return array<string, array{success: bool, message: string}>
      */
-    public function syncAll(): array
+    public function syncAll(int $delaySeconds = 0): array
     {
         $results = [];
+        $delaySeconds = max(0, $delaySeconds);
+        $first = true;
 
-        MapLayer::query()->each(function (MapLayer $layer) use (&$results) {
+        MapLayer::query()->each(function (MapLayer $layer) use (&$results, &$first, $delaySeconds) {
+            if ( ! $first && $delaySeconds > 0) {
+                sleep($delaySeconds);
+            }
+
+            $first = false;
             $results[$layer->slug] = $this->sync($layer);
         });
 
@@ -63,9 +70,9 @@ class MapLayerSyncService
 
     private function fetchGeoJson(MapLayer $layer): stdClass
     {
-        // Prefer geojson_link if available (already in geojson format)
-        if ($layer->geojson_link) {
-            return $this->fetchFromGeoJsonLink($layer->geojson_link);
+        // Prefer geojson_remote_link if available (already in geojson format)
+        if ($layer->geojson_remote_link) {
+            return $this->fetchFromGeoJsonLink($layer->geojson_remote_link);
         }
 
         // Fall back to raw_data_link (CSV from Google Sheets)
@@ -73,7 +80,7 @@ class MapLayerSyncService
             return $this->fetchFromCsvLink($layer->raw_data_link);
         }
 
-        throw new RuntimeException("No data source configured (needs geojson_link or raw_data_link).");
+        throw new RuntimeException("No data source configured (needs geojson_remote_link or raw_data_link).");
     }
 
     private function fetchFromGeoJsonLink(string $url): stdClass
@@ -141,7 +148,7 @@ class MapLayerSyncService
                 continue;
             }
 
-            $properties = new stdClass();
+            $properties = new stdClass;
             foreach ($record as $key => $value) {
                 if (in_array($key, ['Latitude', 'Longitude'], true)) {
                     continue;

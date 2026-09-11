@@ -20,7 +20,7 @@ class SyncMapLayersCommandTest extends DatabaseTestCase
     {
         MapLayer::factory()->create([
             'slug' => 'parks',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/parks.csv',
         ]);
 
@@ -37,13 +37,13 @@ class SyncMapLayersCommandTest extends DatabaseTestCase
     {
         MapLayer::factory()->create([
             'slug' => 'breweries',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/brew.csv',
         ]);
 
         MapLayer::factory()->create([
             'slug' => 'parks',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/parks.csv',
         ]);
 
@@ -69,7 +69,7 @@ class SyncMapLayersCommandTest extends DatabaseTestCase
     {
         MapLayer::factory()->create([
             'slug' => 'broken',
-            'geojson_link' => null,
+            'geojson_remote_link' => null,
             'raw_data_link' => 'https://example.com/broken.csv',
         ]);
 
@@ -79,5 +79,22 @@ class SyncMapLayersCommandTest extends DatabaseTestCase
 
         $this->artisan('map:sync')
             ->assertFailed();
+    }
+
+    public function test_sync_all_accepts_delay_option(): void
+    {
+        MapLayer::factory()->create([
+            'slug' => 'parks',
+            'geojson_remote_link' => null,
+            'raw_data_link' => 'https://example.com/parks.csv',
+        ]);
+
+        Http::fake([
+            'example.com/*' => Http::response("Latitude,Longitude,Title\n34.85,-82.40,Central Park", 200),
+        ]);
+
+        $this->artisan('map:sync', ['--delay' => 0])
+            ->assertSuccessful()
+            ->expectsOutputToContain('parks');
     }
 }

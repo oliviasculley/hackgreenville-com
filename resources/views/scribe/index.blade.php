@@ -1292,8 +1292,8 @@ response.json()</code></pre></div>
             &quot;center_latitude&quot;: 34.8507,
             &quot;center_longitude&quot;: -82.3985,
             &quot;zoom_level&quot;: 10,
-            &quot;geojson_link&quot;: &quot;http://www.cruickshank.com/adipisci-quidem-nostrum-qui-commodi-incidunt-iure&quot;,
-            &quot;geojson_url&quot;: &quot;http://localhost:8000/api/v1/map-layers/quos-velit-et-fugiat-sunt-nihil-accusantium-harum/geojson&quot;,
+            &quot;geojson_remote_link&quot;: &quot;http://www.cruickshank.com/adipisci-quidem-nostrum-qui-commodi-incidunt-iure&quot;,
+            &quot;geojson_local_url&quot;: &quot;http://localhost:8000/api/v1/map-layers/quos-velit-et-fugiat-sunt-nihil-accusantium-harum/geojson&quot;,
             &quot;contribute_link&quot;: &quot;https://mclaughlin.com/ipsum-nostrum-omnis-autem-et-consequatur-aut-dolores-enim.html&quot;,
             &quot;raw_data_link&quot;: &quot;http://vonrueden.com/&quot;,
             &quot;maintainers&quot;: [
@@ -1471,7 +1471,7 @@ Must be one of:
 
             </summary>
                                                 <div style="margin-left: 14px; clear: unset;">
-                        <b style="line-height: 2;"><code>geojson_link</code></b>&nbsp;&nbsp;
+                        <b style="line-height: 2;"><code>geojson_remote_link</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
@@ -1479,12 +1479,12 @@ Must be one of:
 <p>The remote/origin source URL the layer's GeoJSON is synced from (may be null when the layer is built from a spreadsheet). This is the upstream source, not the HackGreenville-hosted file.</p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
-                        <b style="line-height: 2;"><code>geojson_url</code></b>&nbsp;&nbsp;
+                        <b style="line-height: 2;"><code>geojson_local_url</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
 <br>
-<p>The HackGreenville-hosted endpoint that serves this layer's GeoJSON FeatureCollection. Consumers should read GeoJSON from here, not from geojson_link.</p>
+<p>The HackGreenville-hosted endpoint that serves this layer's GeoJSON FeatureCollection. Consumers should read GeoJSON from here, not from geojson_remote_link.</p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>raw_data_link</code></b>&nbsp;&nbsp;
@@ -1492,7 +1492,7 @@ Must be one of:
  &nbsp;
  &nbsp;
 <br>
-<p>The remote spreadsheet (CSV) the GeoJSON is generated from when no geojson_link is set.</p>
+<p>The remote spreadsheet (CSV) the GeoJSON is generated from when no geojson_remote_link is set.</p>
                     </div>
                                     </details>
         </div>

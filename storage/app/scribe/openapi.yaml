@@ -967,8 +967,8 @@ paths:
                       center_latitude: 34.8507
                       center_longitude: -82.3985
                       zoom_level: 10
-                      geojson_link: 'http://www.cruickshank.com/adipisci-quidem-nostrum-qui-commodi-incidunt-iure'
-                      geojson_url: 'http://localhost:8000/api/v1/map-layers/quos-velit-et-fugiat-sunt-nihil-accusantium-harum/geojson'
+                      geojson_remote_link: 'http://www.cruickshank.com/adipisci-quidem-nostrum-qui-commodi-incidunt-iure'
+                      geojson_local_url: 'http://localhost:8000/api/v1/map-layers/quos-velit-et-fugiat-sunt-nihil-accusantium-harum/geojson'
                       contribute_link: 'https://mclaughlin.com/ipsum-nostrum-omnis-autem-et-consequatur-aut-dolores-enim.html'
                       raw_data_link: 'http://vonrueden.com/'
                       maintainers:
@@ -988,8 +988,8 @@ paths:
                         center_latitude: 34.8507
                         center_longitude: -82.3985
                         zoom_level: 10
-                        geojson_link: 'http://www.cruickshank.com/adipisci-quidem-nostrum-qui-commodi-incidunt-iure'
-                        geojson_url: 'http://localhost:8000/api/v1/map-layers/quos-velit-et-fugiat-sunt-nihil-accusantium-harum/geojson'
+                        geojson_remote_link: 'http://www.cruickshank.com/adipisci-quidem-nostrum-qui-commodi-incidunt-iure'
+                        geojson_local_url: 'http://localhost:8000/api/v1/map-layers/quos-velit-et-fugiat-sunt-nihil-accusantium-harum/geojson'
                         contribute_link: 'https://mclaughlin.com/ipsum-nostrum-omnis-autem-et-consequatur-aut-dolores-enim.html'
                         raw_data_link: 'http://vonrueden.com/'
                         maintainers:
@@ -1020,10 +1020,10 @@ paths:
                         zoom_level:
                           type: integer
                           example: 10
-                        geojson_link:
+                        geojson_remote_link:
                           type: string
                           example: 'http://www.cruickshank.com/adipisci-quidem-nostrum-qui-commodi-incidunt-iure'
-                        geojson_url:
+                        geojson_local_url:
                           type: string
                           example: 'http://localhost:8000/api/v1/map-layers/quos-velit-et-fugiat-sunt-nihil-accusantium-harum/geojson'
                         contribute_link:

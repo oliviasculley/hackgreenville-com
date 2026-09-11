@@ -21,9 +21,9 @@ class MapLayersApiV1Controller extends Controller
      * @apiResource HackGreenville\Api\Resources\MapLayers\V1\MapLayerCollection
      * @apiResourceModel App\Models\MapLayer states=forDocumentation
      *
-     * @responseField data[].geojson_link string The remote/origin source URL the layer's GeoJSON is synced from (may be null when the layer is built from a spreadsheet). This is the upstream source, not the HackGreenville-hosted file.
-     * @responseField data[].geojson_url string The HackGreenville-hosted endpoint that serves this layer's GeoJSON FeatureCollection. Consumers should read GeoJSON from here, not from geojson_link.
-     * @responseField data[].raw_data_link string The remote spreadsheet (CSV) the GeoJSON is generated from when no geojson_link is set.
+     * @responseField data[].geojson_remote_link string The remote/origin source URL the layer's GeoJSON is synced from (may be null when the layer is built from a spreadsheet). This is the upstream source, not the HackGreenville-hosted file.
+     * @responseField data[].geojson_local_url string The HackGreenville-hosted endpoint that serves this layer's GeoJSON FeatureCollection. Consumers should read GeoJSON from here, not from geojson_remote_link.
+     * @responseField data[].raw_data_link string The remote spreadsheet (CSV) the GeoJSON is generated from when no geojson_remote_link is set.
      */
     public function __invoke(MapLayersApiV1Request $request)
     {

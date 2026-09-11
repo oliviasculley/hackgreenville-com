@@ -17,7 +17,7 @@ Start with the [interactive API explorer](https://hackgreenville.com/docs/api) w
 
 ## Limitations, Gotchas, and Contributor Tips
 * The production / live website is cached and changes may take up to 4 hours to show due to the cache.
-* GeoJSON data is synced from external sources (Google Sheets CSV or direct GeoJSON links) and cached locally.
+* GeoJSON data is synced from external sources (Google Sheets CSV or `geojson_remote_link`) and cached locally. The API exposes that origin as `geojson_remote_link` and the HG-hosted file as `geojson_local_url`.
 * Please do not hammer the APIs
 * Contact the contributors at [HackGreenville Labs](https://hackgreenville.com/labs) via Slack #hg-labs channel with any questions.
 

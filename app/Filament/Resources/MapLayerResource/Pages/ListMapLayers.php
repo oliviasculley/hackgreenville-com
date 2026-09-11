@@ -20,7 +20,7 @@ class ListMapLayers extends ListRecords
                 ->icon('heroicon-o-arrow-path')
                 ->requiresConfirmation()
                 ->action(function () {
-                    $results = app(MapLayerSyncService::class)->syncAll();
+                    $results = app(MapLayerSyncService::class)->syncAll(delaySeconds: 1);
                     $succeeded = collect($results)->where('success', true)->count();
                     $failed = collect($results)->where('success', false)->count();
 

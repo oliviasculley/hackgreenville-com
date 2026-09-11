@@ -28,8 +28,8 @@ class MapLayerApiV1Test extends TestCase
                     'center_latitude',
                     'center_longitude',
                     'zoom_level',
-                    'geojson_link',
-                    'geojson_url',
+                    'geojson_remote_link',
+                    'geojson_local_url',
                     'contribute_link',
                     'raw_data_link',
                     'maintainers',
@@ -141,14 +141,14 @@ class MapLayerApiV1Test extends TestCase
         $response->assertJsonStructure(['data', 'links', 'meta']);
     }
 
-    public function test_geojson_url_is_present_in_response(): void
+    public function test_geojson_local_url_is_present_in_response(): void
     {
         $layer = MapLayer::factory()->create(['slug' => 'breweries']);
 
         $response = $this->getJson('/api/v1/map-layers');
 
         $response->assertStatus(200);
-        $response->assertJsonPath('data.0.geojson_url', fn ($url) => str_contains($url, '/api/v1/map-layers/breweries/geojson'));
+        $response->assertJsonPath('data.0.geojson_local_url', fn ($url) => str_contains($url, '/api/v1/map-layers/breweries/geojson'));
     }
 
     public function test_geojson_endpoint_returns_geojson(): void
