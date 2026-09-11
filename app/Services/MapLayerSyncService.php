@@ -148,7 +148,7 @@ class MapLayerSyncService
                 continue;
             }
 
-            $properties = new stdClass;
+            $properties = new stdClass();
             foreach ($record as $key => $value) {
                 if (in_array($key, ['Latitude', 'Longitude'], true)) {
                     continue;
