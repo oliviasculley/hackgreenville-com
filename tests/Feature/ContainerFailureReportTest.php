@@ -200,7 +200,7 @@ BASH);
 
     private function captureLogMessages(): ArrayObject
     {
-        $messages = new ArrayObject;
+        $messages = new ArrayObject();
 
         Event::listen(function (MessageLogged $event) use ($messages) {
             $messages->append($event->message);
