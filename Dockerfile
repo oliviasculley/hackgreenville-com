@@ -74,6 +74,16 @@ RUN mkdir -p /etc/s6-overlay/s6-rc.d/deploy-init && \
     mkdir -p /etc/s6-overlay/user-bundles.d/user/contents.d && \
     touch /etc/s6-overlay/user-bundles.d/user/contents.d/deploy-init
 
+RUN chmod +x /var/www/html/scripts/container-entrypoint.sh
+
 EXPOSE 8080
 
 USER www-data
+
+# Stay in front of the image entrypoint so a crash outside PHP, such as s6
+# stopping the container during boot, is reported with Log::error. That uses
+# the same Slack webhook as the rest of the application logs.
+# Setting ENTRYPOINT clears the CMD inherited from serversideup, so /init
+# is declared again. A Railway start command still replaces this CMD.
+ENTRYPOINT ["/var/www/html/scripts/container-entrypoint.sh"]
+CMD ["/init"]
